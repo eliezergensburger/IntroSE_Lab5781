@@ -116,7 +116,10 @@ public class Plane implements FlatGeometry {
 
         double  t = alignZero(mechane / nv);
 
-        Point3D P = P0.add(v.scale(t));
+        if (t <=0){
+            return  null;
+        }
+        Point3D P = ray.getPoint(t);
 
         return List.of(P);
     }

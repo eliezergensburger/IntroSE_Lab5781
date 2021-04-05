@@ -7,12 +7,11 @@ import primitives.Vector;
 import java.util.List;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
 
 public class Sphere extends RadialGeometry{
     final Point3D _center;
 
-    public Sphere(Point3D center, double radius) {
+    public Sphere(double radius, Point3D center) {
         super(radius);
         _center = center;
     }
