@@ -61,7 +61,7 @@ class VectorTest {
         assertEquals(1, v.length(), 1e-10);
 
         assertThrows(IllegalArgumentException.class,
-                () ->  { new Vector(0, 0, 0);},
+                () ->   new Vector(0, 0, 0),
                 "head camnot be (0,0,0)");
     }
     @Test
