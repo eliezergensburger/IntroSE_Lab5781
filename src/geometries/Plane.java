@@ -9,7 +9,7 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Plane implements Geometry {
+public class Plane implements FlatGeometry {
 
     final Point3D _q0;
     final Vector _normal;

@@ -12,15 +12,17 @@ import static primitives.Util.*;
  *
  * @author Dan zilberstein
  */
-public class Polygon implements Geometry {
+public class Polygon implements FlatGeometry {
     /**
      * List of polygon's vertices
      */
     protected List<Point3D> _vertices;
+
     /**
      * Associated plane in which the polygon lays
      */
     protected Plane _plane;
+
 
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
@@ -46,11 +48,13 @@ public class Polygon implements Geometry {
     public Polygon(Point3D... vertices) {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
-        this._vertices = List.of(vertices);
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
         _plane = new Plane(vertices[0], vertices[1], vertices[2]);
+
+
+        _vertices = List.of(vertices);
         if (vertices.length == 3)
             return; // no need for more tests for a Triangle
 

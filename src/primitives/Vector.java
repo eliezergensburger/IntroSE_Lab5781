@@ -1,6 +1,7 @@
 package primitives;
 
 import static primitives.Point3D.ZERO;
+import static primitives.Util.isZero;
 
 /**
  * Vector in 3D for RayTracing
@@ -13,7 +14,7 @@ public class Vector {
     /**
      * primary  constructor for Vector class
      *
-     * @param head
+     * @param head head of vector starting from origin Point(0.0.0)
      */
     public Vector(Point3D head) {
         if (head.equals(ZERO)) {
@@ -78,7 +79,7 @@ public class Vector {
     /**
      * Cross product (vectorial product)
      *
-     * @param v
+     * @param v second vector
      * @return new Vector resulting from cross product
      * @link https://en.wikipedia.org/wiki/Cross_product
      */
@@ -105,7 +106,7 @@ public class Vector {
     }
 
     /**
-     * @return
+     * @return euclidean length squared of the vector
      */
     public double lengthSquared() {
         double u1 = _head._x._coord;
@@ -135,9 +136,11 @@ public class Vector {
     public Vector normalize() {
         double length = this.length();
 
-        //cannot divide by 0
-        if (length == 0)
-            throw new ArithmeticException("divide by Zero");
+//      the following check is not necessary because there
+//      cannot be a ZERO vector
+//        //cannot divide by 0
+//        if (length == 0)
+//            throw new ArithmeticException("divide by Zero");
 
         double x = this._head._x._coord;
         double y = this._head._y._coord;
@@ -181,7 +184,7 @@ public class Vector {
      * @param scalar scaling factot
      */
     public Vector scale(double scalar) {
-        if(Double.compare(scalar,0d)== 0){
+        if(isZero(scalar)){
             throw new IllegalArgumentException("scaling factor == 0");
         }
         return new Vector(

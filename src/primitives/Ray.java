@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 public class Ray {
     final  Point3D _pOrigin;
     final Vector _direction;
@@ -15,6 +17,13 @@ public class Ray {
 
     public Vector getDirection() {
         return new Vector(_direction._head);
+    }
+
+   public Point3D getPoint(double delta ){
+        if (isZero(delta)){
+            return  _pOrigin;
+        }
+        return _pOrigin.add(_direction.scale(delta));
     }
 
     @Override

@@ -13,8 +13,6 @@ public class Point3D {
     //static Point3D for origin point (0,0,0)
     public final static Point3D ZERO = new Point3D(0d, 0d, 0d);
 
-
-
     /**
      * primary constructor for Point3D
      * @param x coordinate value for X axis
@@ -45,6 +43,17 @@ public class Point3D {
         return "(" + _x + "," + _y + "," + _z + ')';
     }
 
+    //getters
+    public double getX() {
+        return _x._coord;
+    }
+    public double getY() {
+        return _y._coord;
+    }
+    public double getZ() {
+        return _z._coord;
+    }
+
     /**
      * @param other
      * @return (x2 - x1)^2 + (y2-y1)^2 + (z2-z1)^2
@@ -53,6 +62,7 @@ public class Point3D {
         final double x1 = _x._coord;
         final double y1 = _y._coord;
         final double z1 = _z._coord;
+
         final double x2 = other._x._coord;
         final double y2 = other._y._coord;
         final double z2 = other._z._coord;
