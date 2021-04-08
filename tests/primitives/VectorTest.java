@@ -3,7 +3,6 @@ package primitives;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static primitives.Util.isZero;
 
 class VectorTest {
     Vector v1 = new Vector(1, 2, 3);
@@ -15,21 +14,17 @@ class VectorTest {
      */
     @Test
     public void testDotProductEP() {
-        Vector v1 = new Vector(1, 2, 3);
-
+   
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple dotProduct test
-        Vector v2 = new Vector(-2, -4, -6);
-        assertEquals(-28d, v1.dotProduct(v2), 0.00001, "dotProduct() wrong value");
+            assertEquals(-28d, v1.dotProduct(v2), 0.00001, "dotProduct() wrong value");
     }
 
     @Test
     public void testDotProductBVA() {
         // =============== Boundary Values Tests ==================
-        Vector v1 = new Vector(1, 2, 3);
         // TC11: dotProduct for orthogonal vectors
-        Vector v3 = new Vector(0, 3, -2);
-        assertEquals(
+         assertEquals(
                 0d, v1.dotProduct(v3),
                 0.00001,
                 "dotProduct() for orthogonal vectors is not zero");
@@ -39,8 +34,7 @@ class VectorTest {
     void testCrossProduct() {
 
         // ============ Equivalence Partitions Tests ==============
-        Vector v3 = new Vector(0, 3, -2);
-        Vector vr = v1.crossProduct(v3);
+         Vector vr = v1.crossProduct(v3);
 
         // Test that length of cross-product is proper (orthogonal vectors taken for simplicity)
         assertEquals(v1.length() * v3.length(), vr.length(), 0.00001, "crossProduct() wrong result length");
@@ -50,14 +44,7 @@ class VectorTest {
         assertTrue(isZero(vr.dotProduct(v3)), "crossProduct() result is not orthogonal to 2nd operand");
 
         // =============== Boundary Values Tests ==================
-        // test zero vector from cross-productof co-lined vectors
-//        try {
-//            v1.crossProduct(v2);
-//            fail("crossProduct() for parallel vectors does not throw an exception");
-//        } catch (IllegalArgumentException e) {
-//            System.out.println("GOOD: a Vector with Point(0,0,0) cannot be created");
-//        }
-        assertThrows(
+         assertThrows(
                 IllegalArgumentException.class,
                 () -> v1.crossProduct(v2),
                 "crossProduct() for parallel vectors does not throw an exception"
@@ -74,7 +61,7 @@ class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
         assertEquals(14d,
-                new Vector(1, 2, 3).lengthSquared(), 0.00001,
+                v1.lengthSquared(), 0.00001,
                 "lengthSquared() wrong value");
 
     }
