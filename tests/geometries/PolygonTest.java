@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import primitives.*;
 
-import static primitives.Util.isZero;
+// import static primitives.Util.isZero;
 
 /**
  * Testing Polygons

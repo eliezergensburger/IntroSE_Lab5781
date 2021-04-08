@@ -185,4 +185,5 @@ class VectorTest {
                 () -> new Vector(1, 2, 3).scale(0d),
                 "Scale by 0 must throw exception");
     }
+
 }

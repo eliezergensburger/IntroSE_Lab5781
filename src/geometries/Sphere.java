@@ -8,7 +8,7 @@ import java.util.List;
 
 import static primitives.Util.alignZero;
 
-public class Sphere extends RadialGeometry{
+public class Sphere extends RadialGeometry {
     final Point3D _center;
 
     public Sphere(double radius, Point3D center) {
@@ -38,30 +38,28 @@ public class Sphere extends RadialGeometry{
         Vector U = _center.subtract(P0);
 
         double tm = alignZero(v.dotProduct(U));
-
-        double d = alignZero(Math.sqrt(U.lengthSquared() -tm*tm));
+        double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
 
         // no intersections : the ray direction is above the sphere
-        if(d>=_radius){
+        if (d >= _radius) {
             return null;
         }
 
-        double th = alignZero(Math.sqrt(_radius*_radius - d*d));
+        double th = alignZero(Math.sqrt(_radius * _radius - d * d));
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
 
-        double t1 = alignZero(tm -th);
-        double t2 = alignZero( tm + th);
-
-        if(t1 > 0 && t2 > 0){
+        if (t1 > 0 && t2 > 0) {
             Point3D P1 = P0.add(v.scale(t1));
             Point3D P2 = P0.add(v.scale(t2));
 
-            return List.of(P1,P2);
+            return List.of(P1, P2);
         }
-        if(t1 > 0){
+        if (t1 > 0) {
             Point3D P1 = P0.add(v.scale(t1));
             return List.of(P1);
         }
-        if(t2 > 0){
+        if (t2 > 0) {
             Point3D P2 = P0.add(v.scale(t2));
             return List.of(P2);
         }
