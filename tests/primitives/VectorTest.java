@@ -3,6 +3,7 @@ package primitives;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static primitives.Util.isZero;
 
 class VectorTest {
     Vector v1 = new Vector(1, 2, 3);
@@ -102,7 +103,7 @@ class VectorTest {
         assertEquals(1d, v.lengthSquared(), 0.00001,
                 "wrong normalized vector length");
         assertEquals(new Vector(0, 0.6, 0.8), v, "wrong normalized vector");
-
+        //kjkjklnkn ihjiojho ihoil oih uihi hioh oijioj oijoiu oiujiojiou joijoi uoijiojio oijoijoij oijoi ih ihio uih uihi uhih ihjio hioh ioiou iljio ij iio  ih ii i i
     }
 
     @Test

@@ -21,7 +21,11 @@ public class CameraRayIntersectionsIntegrationTests {
      */
     private void assertCountIntersections(Camera cam, Intersectable geo, int expected) {
         int count = 0;
-        cam.setViewPlaneSize(3, 3).setDistance(1);
+
+        cam.setHeight(3);
+        cam.setWidth(3);
+        cam.setDistance(1);
+
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
                 var intersections = geo.findIntersections(cam.constructRayThroughPixel(3, 3, j, i));
@@ -35,8 +39,8 @@ public class CameraRayIntersectionsIntegrationTests {
      */
     @Test
     public void cameraRaySphereIntegration() {
-        Camera cam1 = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0));
-        Camera cam2 = new Camera(new Point3D(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, -1, 0));
+        Camera cam1 = new Camera.CameraBuilder(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0)).build();
+        Camera cam2 = new Camera.CameraBuilder(new Point3D(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, -1, 0)).build();
 
         // TC01: Small Sphere 2 points
         assertCountIntersections(cam1, new Sphere(1, new Point3D(0, 0, -3)), 2);
@@ -59,7 +63,7 @@ public class CameraRayIntersectionsIntegrationTests {
      */
     @Test
     public void cameraRayPlaneIntegration() {
-        Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0));
+        Camera cam = new Camera.CameraBuilder(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0)).build();
 
         // TC01: Plane against camera 9 points
         assertCountIntersections(cam, new Plane(new Point3D(0, 0, -5), new Vector(0, 0, 1)), 9);
@@ -79,7 +83,7 @@ public class CameraRayIntersectionsIntegrationTests {
      */
     @Test
     public void cameraRayTriangleIntegration() {
-        Camera cam = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0));
+        Camera cam = new Camera.CameraBuilder(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0)).build();
 
         // TC01: Small triangle 1 point
         assertCountIntersections(cam, new Triangle(new Point3D(1, 1, -2), new Point3D(-1, 1, -2), new Point3D(0, -1, -2)), 1);
