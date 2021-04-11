@@ -97,7 +97,7 @@ public class Camera {
     private double _width ;
     private double _height;
 
-    private Camera (CameraBuilder builder){
+    private Camera (BuilderCamera builder){
         _p0 = builder._p0;
         _vTo =builder._vTo;
         _vUp=builder._vUp;
@@ -157,7 +157,7 @@ public class Camera {
         return _height;
     }
 
-    public static class CameraBuilder {
+    public static class BuilderCamera {
         final private Point3D _p0;
         final private Vector _vTo;
         final private Vector _vUp;
@@ -167,13 +167,13 @@ public class Camera {
         private double _width =1;
         private double _height=1;
 
-        public CameraBuilder setDistance(double distance) {
+        public BuilderCamera setDistance(double distance) {
             _distance = distance;
             return this;
         }
 
 
-        public CameraBuilder setViewPlaneSize(double width, double height) {
+        public BuilderCamera setViewPlaneSize(double width, double height) {
             _width = width;
             _height = height;
             return  this;
@@ -183,7 +183,7 @@ public class Camera {
             Camera camera = new Camera(this);
             return  camera;
         }
-        public CameraBuilder(Point3D p0, Vector vTo, Vector vUp) {
+        public BuilderCamera(Point3D p0, Vector vTo, Vector vUp) {
             _p0 = p0;
 
             if (!isZero(vTo.dotProduct(vUp))) {
