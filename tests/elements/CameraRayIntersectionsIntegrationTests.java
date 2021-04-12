@@ -5,6 +5,9 @@ import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -22,15 +25,32 @@ public class CameraRayIntersectionsIntegrationTests {
     private void assertCountIntersections(Camera cam, Intersectable geo, int expected) {
         int count = 0;
 
+        List<Point3D> allpoints = null;
+
         cam.setHeight(3);
         cam.setWidth(3);
         cam.setDistance(1);
 
-        for (int i = 0; i < 3; ++i)
+        //view plane 3X3 (WxH 3X3 & nx,ny =3 => Rx,Ry =1)
+        for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 var intersections = geo.findIntersections(cam.constructRayThroughPixel(3, 3, j, i));
+                if (intersections != null) {
+                    if (allpoints == null) {
+                        allpoints = new LinkedList<>();
+                    }
+                    allpoints.addAll(intersections);
+                }
                 count += intersections == null ? 0 : intersections.size();
             }
+        }
+        System.out.format("there is %d points:%n",count);
+        if(allpoints!=null){
+            for (var item: allpoints ) {
+                System.out.println(item);
+            }
+        }
+        System.out.println();
         assertEquals(expected, count, "Wrong amount of intersections");
     }
 
