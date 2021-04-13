@@ -119,6 +119,7 @@ public class Plane implements FlatGeometry {
         if (t <=0){
             return  null;
         }
+
         Point3D P = ray.getPoint(t);
 
         return List.of(P);
