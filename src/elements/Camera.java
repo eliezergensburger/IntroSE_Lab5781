@@ -107,10 +107,26 @@ public class Camera {
         _distance =builder._distance;
     }
 
-    //Builder methods
-    public void setDistance(double distance) {
+    //Camera setter chaining methods
+    public Camera setDistance(double distance) {
         _distance = distance;
+        return this;
      }
+
+    public Camera setViewPlaneSize(double width,double height) {
+        _width = width;
+        _height = height;
+        return this;
+    }
+
+    //Camera getters methods
+    public double getWidth() {
+        return _width;
+    }
+
+    public double getHeight() {
+        return _height;
+    }
 
     // constructing a ray passing through pixel(i,j) of the view plane
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
@@ -141,22 +157,9 @@ public class Camera {
 
     }
 
-    public void setWidth(double width) {
-        _width = width;
-    }
-
-    public void setHeight(double height) {
-        _height = height;
-    }
-
-    public double getWidth() {
-        return _width;
-    }
-
-    public double getHeight() {
-        return _height;
-    }
-
+    /**
+     * Builder Class for Camera
+     */
     public static class BuilderCamera {
         final private Point3D _p0;
         final private Vector _vTo;
@@ -173,8 +176,12 @@ public class Camera {
         }
 
 
-        public BuilderCamera setViewPlaneSize(double width, double height) {
+        public BuilderCamera setViewPlaneWidth(double width) {
             _width = width;
+             return  this;
+        }
+
+        public BuilderCamera setViewPlaneHeight(double height) {
             _height = height;
             return  this;
         }
@@ -183,6 +190,7 @@ public class Camera {
             Camera camera = new Camera(this);
             return  camera;
         }
+
         public BuilderCamera(Point3D p0, Vector vTo, Vector vUp) {
             _p0 = p0;
 
