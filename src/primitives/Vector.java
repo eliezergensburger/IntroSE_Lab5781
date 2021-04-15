@@ -193,9 +193,9 @@ public class Vector {
     }
 
     /**
-     * @param axis
-     * @param theta
-     * @return
+     * @param axis axis of rotation
+     * @param theta angle of rotation
+     *
      * @author Yona Szmerla
      */
     public void rotateVector(Vector axis, double theta) {
