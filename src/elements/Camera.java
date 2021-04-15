@@ -13,26 +13,26 @@ public class Camera {
     final private Vector _vRight;
 
     private double _distance;
-    private double _width ;
+    private double _width;
     private double _height;
 
-    private Camera (BuilderCamera builder){
+    private Camera(BuilderCamera builder) {
         _p0 = builder._p0;
-        _vTo =builder._vTo;
-        _vUp=builder._vUp;
-        _vRight= builder._vRight;
-        _height= builder._height;
-        _width=builder._width;
-        _distance =builder._distance;
+        _vTo = builder._vTo;
+        _vUp = builder._vUp;
+        _vRight = builder._vRight;
+        _height = builder._height;
+        _width = builder._width;
+        _distance = builder._distance;
     }
 
     //Camera setter chaining methods
     public Camera setDistance(double distance) {
         _distance = distance;
         return this;
-     }
+    }
 
-    public Camera setViewPlaneSize(double width,double height) {
+    public Camera setViewPlaneSize(double width, double height) {
         _width = width;
         _height = height;
         return this;
@@ -77,6 +77,37 @@ public class Camera {
     }
 
     /**
+     * added by @author Yona Szmerla
+     *
+     * @param up    delta for _vUp vector
+     * @param right delta for _vRight vector
+     * @param to    delta for _vTo vector
+     * @return
+     */
+    public Camera moveCamera(double up, double right, double to) {
+        if (up == 0 && right == 0 && to == 0) return this;
+        if (up != 0) this._p0.add(_vUp.scale(up));
+        if (right != 0) this._p0.add(_vRight.scale(right));
+        if (to != 0) this._p0.add(_vTo.scale(to));
+        return this;
+    }
+
+    /**
+     * added by @author Yona Szmerla
+     *
+     * @param axis  turning axis
+     * @param theta angle to turn the camera
+     * @return
+     */
+    public Camera turnCamera(Vector axis, double theta) {
+        if (theta == 0) return this;
+        this._vUp.rotateVector(axis, theta);
+        this._vRight.rotateVector(axis, theta);
+        this._vTo.rotateVector(axis, theta);
+        return this;
+    }
+
+    /**
      * Builder Class for Camera
      */
     public static class BuilderCamera {
@@ -85,9 +116,9 @@ public class Camera {
         final private Vector _vUp;
         final private Vector _vRight;
 
-        private double _distance =10;
-        private double _width =1;
-        private double _height=1;
+        private double _distance = 10;
+        private double _width = 1;
+        private double _height = 1;
 
         public BuilderCamera setDistance(double distance) {
             _distance = distance;
@@ -97,17 +128,17 @@ public class Camera {
 
         public BuilderCamera setViewPlaneWidth(double width) {
             _width = width;
-             return  this;
+            return this;
         }
 
         public BuilderCamera setViewPlaneHeight(double height) {
             _height = height;
-            return  this;
+            return this;
         }
 
-        public Camera build(){
+        public Camera build() {
             Camera camera = new Camera(this);
-            return  camera;
+            return camera;
         }
 
         public BuilderCamera(Point3D p0, Vector vTo, Vector vUp) {
