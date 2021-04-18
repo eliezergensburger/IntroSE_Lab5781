@@ -72,7 +72,7 @@ public class Point3D {
 
     /**
      * @param point3D
-     * @return euclidean distance between 2  3D points
+     * @return euclidean distance between 2  3D points using the Pythagorean theorem
      */
     public double distance(Point3D point3D) {
         return Math.sqrt(distanceSquared(point3D));

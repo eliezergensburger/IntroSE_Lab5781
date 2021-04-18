@@ -6,27 +6,29 @@ import primitives.Color;
 public class Scene {
     private final String _name;
 
-    private Color _background;
-    private Color _ambientlight;
-    private Geometries _geometries = null;
+    //according to Dan Zilberstein directives
+    public Color background;
+    public Color ambientlight;
+    public Geometries geometries = null;
 
     public Scene(String name) {
         _name = name;
+        geometries = new Geometries();
     }
 
-    //chaining methods
+    //chaining methods (this NOT a builder pattern)
     public Scene setBackground(Color background) {
-        _background = background;
+        this.background = background;
         return  this;
     }
 
     public Scene setAmbientlight(Color ambientlight) {
-        _ambientlight = ambientlight;
+        this.ambientlight = ambientlight;
         return this;
     }
 
     public Scene setGeometries(Geometries geometries) {
-        _geometries = geometries;
+        this.geometries = geometries;
         return  this;
     }
 }
