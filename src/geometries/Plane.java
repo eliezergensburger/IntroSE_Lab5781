@@ -99,14 +99,15 @@ public class Plane implements FlatGeometry {
 
         Vector P0_Q0 = _q0.subtract(P0);
 
-        double mechane = alignZero(n.dotProduct(P0_Q0));
+       //numerator
+        double nP0Q0  = alignZero(n.dotProduct(P0_Q0));
 
         //
-        if (isZero(mechane)){
+        if (isZero(nP0Q0 )){
             return null;
         }
 
-        //mone
+        //denominator
         double nv = alignZero(n.dotProduct(v));
 
         // ray is lying in the plane axis
@@ -114,14 +115,14 @@ public class Plane implements FlatGeometry {
             return null;
         }
 
-        double  t = alignZero(mechane / nv);
+        double  t = alignZero(nP0Q0  / nv);
 
         if (t <=0){
             return  null;
         }
 
-        Point3D P = ray.getPoint(t);
+        Point3D point = ray.getPoint(t);
 
-        return List.of(P);
+        return List.of(point);
     }
 }
