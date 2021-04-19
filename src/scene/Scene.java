@@ -1,5 +1,6 @@
 package scene;
 
+import elements.AmbientLight;
 import geometries.Geometries;
 import primitives.Color;
 
@@ -8,7 +9,7 @@ public class Scene {
 
     //according to Dan Zilberstein directives
     public Color background;
-    public Color ambientlight;
+    public AmbientLight ambientlight;
     public Geometries geometries = null;
 
     public Scene(String name) {
@@ -22,7 +23,7 @@ public class Scene {
         return  this;
     }
 
-    public Scene setAmbientlight(Color ambientlight) {
+    public Scene setAmbientLight(AmbientLight ambientlight) {
         this.ambientlight = ambientlight;
         return this;
     }
@@ -31,4 +32,5 @@ public class Scene {
         this.geometries = geometries;
         return  this;
     }
+
 }
