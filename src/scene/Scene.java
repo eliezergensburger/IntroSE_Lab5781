@@ -8,16 +8,17 @@ public class Scene {
     private final String _name;
 
     //according to Dan Zilberstein directives
-    public Color background;
-    public AmbientLight ambientlight;
+    public Color background = Color.BLACK;
+    public AmbientLight ambientlight= new AmbientLight(new Color(192, 192, 192),1.d); ;
     public Geometries geometries = null;
 
     public Scene(String name) {
         _name = name;
-        geometries = new Geometries();
-    }
+        geometries= new Geometries();
+     }
 
-    //chaining methods (this NOT a builder pattern)
+    //chaining set methods (this NOT a builder pattern)
+
     public Scene setBackground(Color background) {
         this.background = background;
         return  this;

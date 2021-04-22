@@ -74,6 +74,7 @@ public class ImageWriter {
     public void writeToImage() {
         try {
             File file = new File(FOLDER_PATH + '/' + imageName + ".png");
+            file.mkdirs();
             ImageIO.write(image, "png", file);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "I/O error", e);

@@ -4,7 +4,6 @@ import elements.*;
 import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /**
@@ -36,12 +35,12 @@ public class RenderTests {
                 new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)), // down left
                 new Triangle(new Point3D(100, 0, -100), new Point3D(0, -100, -100), new Point3D(100, -100, -100))); // down right
 
-        ImageWriter imageWriter = new ImageWriter("base render test", 1000, 1000);
+        ImageWriter imageWriter = new ImageWriter("base render test 222", 1000, 1000);
         Render render = new Render() //
                 .setImageWriter(imageWriter) //
                 .setScene(scene) //
                 .setCamera(camera) //
-                .setRayTracer(new BasicRayTracer(scene));
+                .setRayTracer(new RayTracerBasic(scene));
 
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));

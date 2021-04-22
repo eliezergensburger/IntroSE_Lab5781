@@ -7,12 +7,11 @@ import scene.Scene;
 
 import java.util.List;
 
-public class BasicRayTracer extends RayTracerBase {
+public class RayTracerBasic extends RayTracerBase {
 
-    public BasicRayTracer(Scene scene) {
+    public RayTracerBasic(Scene scene) {
         super(scene);
     }
-
 
     @Override
     public Color traceRay(Ray ray) {

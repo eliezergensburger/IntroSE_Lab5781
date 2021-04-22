@@ -34,15 +34,21 @@ public class Ray {
      * @return closest point
      */
     public Point3D findClosestPoint(List<Point3D> pointsList){
-        Point3D result = null;
-        double closeDistance = Double.MAX_VALUE;
-        for (Point3D p: pointsList             ) {
+        Point3D result =null;
+        double closestDistance = Double.MAX_VALUE;
+
+        if(pointsList== null){
+            return null;
+        }
+
+        for (Point3D p: pointsList) {
             double temp = p.distance(_pOrigin);
-            if(temp < closeDistance){
-                closeDistance =temp;
+            if(temp < closestDistance){
+                closestDistance =temp;
                 result =p;
             }
         }
+
         return  result;
     }
 
