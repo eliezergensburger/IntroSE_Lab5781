@@ -13,11 +13,11 @@ public class Color {
      * The internal fields tx`o maintain RGB components as double numbers from 0 to
      * whatever...
      */
-    private double r = 0.0;
-    private double g = 0.0;
-    private double b = 0.0;
+    private final double _r;
+    private final double _g;
+    private final double _b;
 
-    public static final Color BLACK = new Color();
+    public static final Color BLACK = new Color(0d,0d,0d);
     public static final Color BLUE = new Color(0, 0, 255);
     public static final Color RED = new Color(255, 0, 0);
     public static final Color GREEN = new Color(0, 255, 0);
@@ -31,11 +31,7 @@ public class Color {
     public static final Color LIGHTGREY = new Color(192, 192, 192);
     public static final Color WHITE = new Color(255, 255, 255);
 
-    /**
-     * Default constructor - to generate Black Color (privately)
-     */
-    private Color() {
-    }
+
 
     /**
      * Constructor to generate a color according to RGB components Each component in
@@ -48,9 +44,9 @@ public class Color {
     public Color(double r, double g, double b) {
         if (r < 0 || g < 0 || b < 0)
             throw new IllegalArgumentException("Negative color component is illegal");
-        this.r = r;
-        this.g = g;
-        this.b = b;
+       _r = r;
+       _g = g;
+       _b = b;
     }
 
     /**
@@ -59,9 +55,9 @@ public class Color {
      * @param other the source color
      */
     public Color(Color other) {
-        r = other.r;
-        g = other.g;
-        b = other.b;
+        _r = other._r;
+        _g = other._g;
+        _b = other._b;
     }
 
     /**
@@ -70,66 +66,11 @@ public class Color {
      * @param other java.awt.Color's source object
      */
     public Color(java.awt.Color other) {
-        r = other.getRed();
-        g = other.getGreen();
-        b = other.getBlue();
+        _r = other.getRed();
+        _g = other.getGreen();
+        _b = other.getBlue();
     }
 
-    /**
-     * Color setter to reset the color to BLACK
-     *
-     * @return the Color object itself for chaining calls
-     */
-    public Color setColor() {
-        r = 0.0;
-        g = 0.0;
-        b = 0.0;
-        return this;
-    }
-
-    /**
-     * Color setter to generate a color according to RGB components Each component
-     * in range 0..255 (for printed white color) or more [for lights]
-     *
-     * @param r Red component
-     * @param g Green component
-     * @param b Blue component
-     * @return the Color object itself for chaining calls
-     */
-    public Color setColor(double r, double g, double b) {
-        if (r < 0 || g < 0 || b < 0)
-            throw new IllegalArgumentException("Negative color component is illegal");
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        return this;
-    }
-
-    /**
-     * Color setter to copy RGB components from another color
-     *
-     * @param other source Color object
-     * @return the Color object itself for chaining calls
-     */
-    public Color setColor(Color other) {
-        r = other.r;
-        g = other.g;
-        b = other.b;
-        return this;
-    }
-
-    /**
-     * Color setter to take components from an base of java.awt.Color object
-     *
-     * @param other java.awt.Color's source object
-     * @return the Color object itself for chaining calls
-     */
-    public Color setColor(java.awt.Color other) {
-        r = other.getRed();
-        g = other.getGreen();
-        b = other.getBlue();
-        return this;
-    }
 
     /**
      * Color getter - returns the color after converting it into java.awt.Color
@@ -138,10 +79,10 @@ public class Color {
      * @return java.awt.Color object based on this Color RGB components
      */
     public java.awt.Color getColor() {
-        int ir = (int) r;
-        int ig = (int) g;
-        int ib = (int) b;
-        return new java.awt.Color(ir > 255 ? 255 : ir, ig > 255 ? 255 : ig, ib > 255 ? 255 : ib);
+        int ir = (int) _r;
+        int ig = (int) _g;
+        int ib = (int) _b;
+        return new java.awt.Color(Math.min(ir, 255), Math.min(ig, 255), Math.min(ib, 255));
     }
 
     /**
@@ -151,13 +92,13 @@ public class Color {
      * @return new Color object which is a result of the operation
      */
     public Color add(Color... colors) {
-        double rr = r;
-        double rg = g;
-        double rb = b;
+        double rr = _r;
+        double rg = _g;
+        double rb = _b;
         for (Color c : colors) {
-            rr += c.r;
-            rg += c.g;
-            rb += c.b;
+            rr += c._r;
+            rg += c._g;
+            rb += c._b;
         }
         return new Color(rr, rg, rb);
     }
@@ -171,7 +112,7 @@ public class Color {
     public Color scale(double k) {
         if (k < 0)
             throw new IllegalArgumentException("Can't scale a color by a negative number");
-        return new Color(r * k, g * k, b * k);
+        return new Color(_r * k, _g * k, _b * k);
     }
 
     /**
@@ -183,7 +124,7 @@ public class Color {
     public Color reduce(double k) {
         if (k < 1)
             throw new IllegalArgumentException("Can't scale a color by a by a number lower than 1");
-        return new Color(r / k, g / k, b / k);
+        return new Color(_r / k, _g / k, _b / k);
     }
 
 }
